@@ -1,0 +1,3 @@
+SQLAlchemy>=2.0.0
+fastapi[standard]
+psycopg2-binary  # <--- これがPostgreSQL用のドライバー

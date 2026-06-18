@@ -1,0 +1,19 @@
+services:
+  # FastAPIのバックエンドサービス
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fastapi_api_container
+    # ローカルのコード変更をコンテナ内にリアルタイムで反映（ボリュームマウント）
+    volumes:
+      - ./app:/code/app
+    # コンテナ内の8000ポートを、ホスト（PC）の8000ポートにマッピング
+    ports:
+      - "8000:8000"
+    # .env ファイルに書き込まれた環境変数をコンテナ内に読み込む
+    env_file:
+      - .env
+    # 開発用にファイル変更検知（--reload）を有効にしてUvicornを起動
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+    
